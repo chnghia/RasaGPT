@@ -615,7 +615,7 @@ def create_vector_index():
 
 def enable_vector():
     session = Session(get_engine(dsn=SU_DSN))
-    query = "CREATE EXTENSION IF NOT EXISTS vector;"
+    query = f"CREATE EXTENSION IF NOT EXISTS vector;"
     session.execute(query)
     session.commit()
     add_vector_distance_fn(session)
