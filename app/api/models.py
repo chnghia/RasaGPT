@@ -1,5 +1,6 @@
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import declared_attr
+from sqlalchemy.sql import text
 from pgvector.sqlalchemy import Vector
 from sqlalchemy import Column
 from datetime import datetime
@@ -615,7 +616,7 @@ def create_vector_index():
 
 def enable_vector():
     session = Session(get_engine(dsn=SU_DSN))
-    query = f"CREATE EXTENSION IF NOT EXISTS vector;"
+    query = text("CREATE EXTENSION IF NOT EXISTS vector;")
     session.execute(query)
     session.commit()
     add_vector_distance_fn(session)
